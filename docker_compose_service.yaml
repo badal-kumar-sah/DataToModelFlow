@@ -1,0 +1,16 @@
+version: "3.8"
+services:
+  model-service:
+    build:
+      context: .
+      dockerfile: Dockerfile_model_service
+    ports:
+      - "5000:5000"
+  data-processor:
+    build:
+      context: .
+      dockerfile: Dockerfile_data_processor
+    volumes:
+      - ./data:/data
+    environment:
+      - PROCESSOR_CONFIG=/data/processing_config.yaml
